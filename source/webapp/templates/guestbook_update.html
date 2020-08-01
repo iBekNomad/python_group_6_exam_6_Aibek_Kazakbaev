@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="text-info">Update guestbook</h1>
+    <h1 class="text-info amatic-text">Update guestbook</h1>
 
     {% url 'guestbook_update' as action_url %}
     {% include 'partial/form.html' with action_url=action_url form_method='post' button_text='Update' %}
