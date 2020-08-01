@@ -3,86 +3,27 @@
 {% block title %}Main{% endblock %}
 
 {% block content %}
-    <h1 class="text-info amatic-text">Guest books</h1>
-    <div class="row row-cols-1 row-cols-md-3">
+    <h1 class="text-info amatic-text d-flex justify-content-center">Guest books</h1>
+    <div class="row">
         {% for guestbook in guestbooks %}
-            <div class="col mb-4">
-                <div class="card border-info mb-3" style="max-width: 18rem;">
-                    <div class="card-header border-info a-text"><a
-                            class="text-success text-uppercase text-decoration-none"
-                            href="{% url "guestbook_view" guestbook.pk %}">{{ guestbook.name }}</a>
+            <div class="col-sm-6">
+                <div class="card mb-3">
+                    <div class="d-flex bd-highlight">
+                        <div class="mr-auto p-2 bd-highlight"><h3 class="d-flex justify-content-start">{{ guestbook.name }}
+                            ({{ guestbook.email }}) </h3></div>
+                        <div class="p-2 bd-highlight"><h3><a
+                                href="{% url 'guestbook_update' guestbook.pk %}" class="text-dark"><i
+                                class="far fa-edit"></i></a></h3></div>
+                        <div class="p-2 bd-highlight"><h3><a
+                                href="{% url 'guestbook_delete' guestbook.pk %}" class="text-dark"><i
+                                class="far fa-trash-alt"></i></a></h3></div>
                     </div>
-                    <div class="card-body text-success">
-                        <h5 class="card-title">{{ guestbook.name }}</h5>
-                        <div class="card-text">Статус: <h3>{{ guestbook.get_status_display_display }}</h3></div>
-                        <div class="card-text">e-mail: <h3>{{ guestbook.email }}</h3></div>
-                    </div>
-                    <div class="card-footer bg-transparent border-info">
-                        <p class="text-secondary">Остаток: {{ guestbook.amount }}</p>
-                        <div class="d-flex justify-content-around">
-                            <p><a href="{% url "guestbook_update" guestbook.pk %}" class="btn btn-sm btn-info">Update</a>
-                            </p>
-                            <p><a href="{% url "guestbook_delete" guestbook.pk %}" class="btn btn-sm btn-info">Delete</a>
-                            </p>
-                        </div>
+                    <div class="card-body text-info">
+                        <h5 class="card-text">{{ guestbook.text }}</h5>
                     </div>
                 </div>
             </div>
-{#            <div class="card mb-3" style="max-width: 540px;">#}
-{#                <div class="row no-gutters">#}
-{#                    <div class="col-md-4">#}
-{#                        <img src="..." class="card-img" alt="...">#}
-{#                    </div>#}
-{#                    <div class="col-md-8">#}
-{#                        <div class="card-body">#}
-{#                            <h5 class="card-title">#}
-{#                                <a class="text-success text-uppercase text-decoration-none"#}
-{#                                   href="{% url "guestbook_view" guestbook.pk %}">{{ guestbook.name }}</a>#}
-{#                            </h5>#}
-{#                            <h5 class="card-title">{{ guestbook.description }}</h5>#}
-{#                            <div class="card-text">Категория: <h3>{{ guestbook.get_category_display }}</h3></div>#}
-{#                            <div class="card-text">Цена: <h3>{{ guestbook.price }} сом</h3></div>#}
-{#                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>#}
-{#                        </div>#}
-{#                        <div class="card-footer bg-transparent border-info">#}
-{#                            <p class="text-secondary">Остаток: {{ guestbook.amount }}</p>#}
-{#                            <div class="d-flex justify-content-around">#}
-{#                                <p><a href="{% url "guestbook_update" guestbook.pk %}"#}
-{#                                      class="btn btn-sm btn-info">Update</a></p>#}
-{#                                <p><a href="{% url "guestbook_delete" guestbook.pk %}"#}
-{#                                      class="btn btn-sm btn-info">Delete</a></p>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
         {% endfor %}
     </div>
 {% endblock %}
 
-<div class="card mb-3" style="max-width: 540px;">
-    <div class="row no-gutters">
-        <div class="col-md-4">
-            <img src="..." class="card-img" alt="...">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title">
-                    <a class="text-success text-uppercase text-decoration-none"
-                       href="{% url "guestbook_view" guestbook.pk %}">{{ guestbook.name }}</a>
-                </h5>
-                <h5 class="card-title">{{ guestbook.description }}</h5>
-                <div class="card-text">Категория: <h3>{{ guestbook.get_category_display }}</h3></div>
-                <div class="card-text">Цена: <h3>{{ guestbook.price }} сом</h3></div>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-            <div class="card-footer bg-transparent border-info">
-                <p class="text-secondary">Остаток: {{ guestbook.amount }}</p>
-                <div class="d-flex justify-content-around">
-                    <p><a href="{% url "guestbook_update" guestbook.pk %}" class="btn btn-sm btn-info">Update</a></p>
-                    <p><a href="{% url "guestbook_delete" guestbook.pk %}" class="btn btn-sm btn-info">Delete</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

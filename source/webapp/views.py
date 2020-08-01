@@ -7,7 +7,11 @@ from .forms import GuestBookForm, BROWSER_DATETIME_FORMAT
 
 
 def index_view(request):
-    data = GuestBook.objects.all()
+    is_admin = request.GET.get('is_admin', None)
+    if is_admin:
+        data = GuestBook.objects.all()
+    else:
+        data = GuestBook.objects.filter(status='active')
     return render(request, 'index.html', context={
         'guestbooks': data
     })
@@ -28,14 +32,12 @@ def guestbook_create_view(request):
     elif request.method == 'POST':
         form = GuestBookForm(data=request.POST)
         if form.is_valid():
-            guestbook = GuestBook.objects.create(
+            GuestBook.objects.create(
                 name=form.cleaned_data['name'],
                 email=form.cleaned_data['email'],
-                text=form.cleaned_data['text'],
-                status=form.cleaned_data['status'],
-                created_at=form.cleaned_data['created_at']
+                text=form.cleaned_data['text']
             )
-            return redirect('guestbook_view', pk=guestbook.pk)
+            return redirect('index')
         else:
             return render(request, 'guestbook_create.html', context={'form': form})
     else:
@@ -48,9 +50,7 @@ def guestbook_update_view(request, pk):
         form = GuestBookForm(initial={
             'name': guestbook.name,
             'email': guestbook.email,
-            'text': guestbook.text,
-            'status': guestbook.status,
-            'created_at': make_naive(guestbook.created_at).strftime(BROWSER_DATETIME_FORMAT)
+            'text': guestbook.text
         })
         return render(request, 'guestbook_update.html', context={
             'form': form,
@@ -62,10 +62,8 @@ def guestbook_update_view(request, pk):
             guestbook.name = form.cleaned_data['name']
             guestbook.email = form.cleaned_data['email']
             guestbook.text = form.cleaned_data['text']
-            guestbook.status = form.cleaned_data['status']
-            guestbook.created_at = form.cleaned_data['created_at']
             guestbook.save()
-            return redirect('guestbook_view', pk=guestbook.pk)
+            return redirect('index')
         else:
             return render(request, 'guestbook_update.html', context={
                 'guestbook': guestbook,

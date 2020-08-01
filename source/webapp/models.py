@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 
 STATUS_CHOICES = [
@@ -12,7 +11,7 @@ class GuestBook(models.Model):
     name = models.CharField(max_length=40, null=False, blank=False, verbose_name='Гость')
     email = models.EmailField(max_length=30, null=False, blank=False, verbose_name='Электронная почта')
     text = models.CharField(max_length=2000, null=False, blank=False, verbose_name='Текст')
-    created_at = models.DateTimeField(blank=True, default=timezone.now, verbose_name='Время создания')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='active', verbose_name='Статус')
 

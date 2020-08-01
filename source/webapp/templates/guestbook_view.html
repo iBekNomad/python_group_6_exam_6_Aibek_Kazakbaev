@@ -9,7 +9,7 @@
 
 {% block content %}
     <h1>{{ guestbook.name }}</h1>
-    <p>{{ guestbook.description }}</p>
-    <p>Категория: {{ guestbook.get_category_display }} | Цена: {{ guestbook.price }}</p>
-    <p>Остаток: {{ guestbook.amount }}</p>
+    <p>{{ guestbook.text }}</p>
+    <p>e-mail: {{ guestbook.email }}</p>
+    <p>Статус: {{ guestbook.get_status_display }}</p>
 {% endblock %}

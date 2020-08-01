@@ -46,3 +46,7 @@ body {
 .a-text:hover {
     color: #ffc122;
 }
+
+.text-size-md {
+    font-size: 20px;
+}
