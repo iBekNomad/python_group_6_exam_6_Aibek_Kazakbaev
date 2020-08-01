@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotAllowed
-from django.utils.timezone import make_naive
+
 
 from webapp.models import GuestBook
-from .forms import GuestBookForm, BROWSER_DATETIME_FORMAT
+from .forms import GuestBookForm
 
 
 def index_view(request):
