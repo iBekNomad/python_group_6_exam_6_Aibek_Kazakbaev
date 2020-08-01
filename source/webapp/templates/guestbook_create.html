@@ -3,9 +3,9 @@
 {% block title %}Create{% endblock %}
 
 {% block content %}
-    <h1 class="text-info">Add New Product</h1>
+    <h1 class="text-info">Add New guestbook</h1>
 
-    {% url 'product_create' as action_url %}
+    {% url 'guestbook_create' as action_url %}
     {% include 'partial/form.html' with action_url=action_url form_method='post' %}
     <br/>
 

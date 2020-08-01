@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}View{% endblock %}
+
+{% block menu %}
+    <li><a href="{% url "guestbook_update" guestbook.pk %}" class="text-uppercase">Update</a></li>
+    <li><a href="{% url "guestbook_delete" guestbook.pk %}" class="text-uppercase">Delete</a></li>
+{% endblock %}
+
+{% block content %}
+    <h1>{{ guestbook.name }}</h1>
+    <p>{{ guestbook.description }}</p>
+    <p>Категория: {{ guestbook.get_category_display }} | Цена: {{ guestbook.price }}</p>
+    <p>Остаток: {{ guestbook.amount }}</p>
+{% endblock %}
