@@ -2,14 +2,26 @@
 
 {% block title %}View{% endblock %}
 
-{% block menu %}
-    <li><a href="{% url "guestbook_update" guestbook.pk %}" class="text-uppercase">Update</a></li>
-    <li><a href="{% url "guestbook_delete" guestbook.pk %}" class="text-uppercase">Delete</a></li>
+{% block content %}
+    {% for guest in guest_object %}
+        <div class="col-sm-6">
+            <div class="card border-info mb-3">
+                <div class="d-flex bd-highlight">
+                    <div class="mr-auto p-2 bd-highlight"><h3 class="d-flex justify-content-start">{{ guest.name }}
+                        ({{ guest.email }}) </h3>
+                    </div>
+                    <div class="p-2 bd-highlight"><h3><a
+                            href="{% url 'guestbook_update' guest.pk %}" class="text-dark"><i
+                            class="far fa-edit"></i></a></h3></div>
+                    <div class="p-2 bd-highlight"><h3><a
+                            href="{% url 'guestbook_delete' guest.pk %}" class="text-dark"><i
+                            class="far fa-trash-alt"></i></a></h3></div>
+                </div>
+                <div class="card-body text-info">
+                    <h5 class="card-text">{{ guest.text }}</h5>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
 
-{% block content %}
-    <h1>{{ guestbook.name }}</h1>
-    <p>{{ guestbook.text }}</p>
-    <p>e-mail: {{ guestbook.email }}</p>
-    <p>Статус: {{ guestbook.get_status_display }}</p>
-{% endblock %}
